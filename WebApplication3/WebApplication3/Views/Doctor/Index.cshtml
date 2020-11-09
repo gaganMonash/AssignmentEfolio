@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1> Welcome @ViewBag.UserName</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>View Consultations</h2>
+        <p>
+            Your Booked Consultations by patients.
+        </p>
+        <p><a class="btn btn-primary" href="@Url.Action("Index", "Consultations")">View Consultations</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Send Email</h2>
+        <p>Send an Email to a patient you have previously had appointment with.</p>
+        <p><a class="btn btn-primary" href="@Url.Action("SendEmail", "Doctor")">Send Email</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Send Bulk Email</h2>
+        <p>Send Email to All your Patients</p>
+        <p><a class="btn btn-primary" href="@Url.Action("SendEmailBulk", "Doctor")">Send Bulk Email</a></p>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var msg = "@TempData["Message"]";
+            if(msg != "" & msg != null)
+            {
+                $('#exampleModalLabel').text("Successful");
+                $('#exampleModalBody').text(msg);
+                $('#exampleModal').modal('show');
+            }
+        });
+    </script>
+}

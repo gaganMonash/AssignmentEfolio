@@ -1,0 +1,42 @@
+﻿@model WebApplication3.ViewModels.ConsultationViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Consultation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cons.PatientId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Model.helper.getPatientFromId(model.cons.PatientId).Fullname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cons.DoctorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => Model.helper.getDoctorFromId(model.cons.DoctorId).Fullname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cons.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cons.Date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

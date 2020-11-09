@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1> Welcome Admin @ViewBag.UserName</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Doctor</h2>
+        <p>Add a New Doctor.</p>
+        <p><a class="btn btn-primary" href="@Url.Action("RegisterDoctor", "Account")">Add</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>PDF Generator</h2>
+        <p>View All Patients</p>
+        <p><a class="btn btn-primary" href="@Url.Action("ViewPatients", "Admin")">Views</a></p>
+    </div>
+
+
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var msg = "@TempData["Message"]";
+            if(msg != "" & msg != null)
+            {
+                $('#exampleModalLabel').text("Successful");
+                $('#exampleModalBody').text(msg);
+                $('#exampleModal').modal('show');
+            }
+        });
+    </script>
+    }

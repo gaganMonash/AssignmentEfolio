@@ -1,0 +1,109 @@
+﻿@model WebApplication3.ViewModels.ConsultationViewModel
+@*@helper WebApplication3.Helper.Utility1*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Consultations</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            @if (Model.userRole == "2")
+            {
+                <th>
+                    Patient
+                </th>
+            }
+            else
+            {
+                <th>
+                    Doctor
+                </th>
+            }
+            <th>
+                Issue
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.consultation)
+        {
+            @Html.HiddenFor(modelItem => item.Id)
+            <tr>
+                @if (Model.userRole == "2")
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.helper.getPatientFromId(item.PatientId).Fullname)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.helper.getDoctorFromId(item.DoctorId).Fullname)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Issue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Cancel", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.userRole != "2")
+{
+    <div style="text-align:center">
+        @Html.ActionLink("Book Appointment", "Create", "Consultations", new { @class = "btn btn-success" })
+    </div>
+}
+@if (Model.userRole == "2")
+{
+    <div>
+        @Html.ActionLink("Back to Home Page", "Index", "Doctor")
+    </div>
+}
+else
+{
+    <div>
+        @Html.ActionLink("Back to Home Page", "Index", "Patient")
+    </div>
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+
+<script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+            var msg = "@TempData["Message"]";
+            if(msg != "" & msg != null)
+            {
+                $('#exampleModalLabel').text("Successful");
+                $('#exampleModalBody').text(msg);
+                $('#exampleModal').modal('show');
+            }
+        });
+</script>
+    @*<script type="text/javascript">
+            $(window).on('load', function () {
+                $('#myModal').modal('show');
+            });
+        </script>*@
+    
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1> Welcome @ViewBag.UserName</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>View Consultations</h2>
+        <p>Your Booked Consultations by patients.</p>
+        <p><a class="btn btn-primary" href="@Url.Action("Index", "Consultations")">View Consultations</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Show Nearby Doctors</h2>
+        <p>Send an Email to a patient you have previously had appointment with.</p>
+        <p><a class="btn btn-primary" href="@Url.Action("showNearbuyDoctors", "Patient")">Show Nearby Doctors</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Rate a Doctor</h2>
+        <p>Send Email to All your Patients</p>
+        <p><a class="btn btn-primary" href="@Url.Action("RatingIndex", "Consultations")">Rate a Doctor</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ratings Graph</h2>
+        <p>See Doctor Ratings</p>
+        <p><a class="btn btn-primary" href="@Url.Action("showGraph", "Patient")">See Rating</a></p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var msg = "@TempData["Message"]";
+            if(msg != "" & msg != null)
+            {
+                $('#exampleModalLabel').text("Successful");
+                $('#exampleModalBody').text(msg);
+                $('#exampleModal').modal('show');
+            }
+        });
+    </script>
+    }
